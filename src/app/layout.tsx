@@ -8,9 +8,17 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "jeje/ui",
+  title: {
+    default: "jeje/ui",
+    template: "%s — jeje/ui",
+  },
   description:
     "A collection of reusable components built on top of shadcn/ui. Copy-paste ready, accessible, and customizable.",
+  metadataBase: new URL("https://jeje-ui.vercel.app"),
+  openGraph: {
+    siteName: "jeje/ui",
+    url: "https://jeje-ui.vercel.app",
+  },
 };
 
 export default function RootLayout({
