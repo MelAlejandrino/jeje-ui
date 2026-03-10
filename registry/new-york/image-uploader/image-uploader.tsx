@@ -1,3 +1,5 @@
+"use client";
+
 import { Trash2Icon, Upload } from "lucide-react";
 import type { ChangeEvent } from "react";
 import { useState, useRef, useEffect } from "react";
@@ -94,7 +96,7 @@ export function ImageUploader({
   return (
     <div className="flex flex-col gap-4">
       {/* Upload area */}
-      <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed p-6 text-center hover:bg-gray-100">
+      <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed p-6 text-center hover:bg-muted">
         <div className={"rounded-sm border p-3"}>
           <Upload className="h-6 w-6" />
         </div>

@@ -12,7 +12,24 @@ const items = [
       {
         path: "components/ui/image-uploader.tsx",
         type: "registry:component",
-        source: "registry/new-york/image-uploader/image-uploader.tsx", 
+        source: "registry/new-york/image-uploader/image-uploader.tsx",
+      },
+    ],
+  },
+  {
+    name: "virtualized-dropdown",
+    type: "registry:component",
+    title: "Virtualized Dropdown",
+    description:
+      "A performant dropdown with virtualization for large datasets.",
+    dependencies: ["@tanstack/react-virtual", "lucide-react"],
+    registryDependencies: ["command", "popover", "button"],
+    files: [
+      {
+        path: "components/ui/virtualized-dropdown.tsx",
+        type: "registry:component",
+        source:
+          "registry/new-york/virtualized-dropdown/virtualized-dropdown.tsx",
       },
     ],
   },
