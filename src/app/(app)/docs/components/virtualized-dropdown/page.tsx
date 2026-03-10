@@ -2,7 +2,7 @@ import { VirtualizedDropdownPageView } from "@/features/virtualized-dropdown/pag
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Virtualized Dropdown — jeje/ui",
+  title: "Virtualized Dropdown",
   description:
     "A performant dropdown with TanStack Virtual. Handles tens of thousands of options without performance degradation. Supports single and multi-select.",
   openGraph: {
