@@ -75,44 +75,39 @@ export function DocsSidebar() {
         </SidebarGroup>
 
         {/* Components */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-xs text-muted-foreground">
-            Components
-          </SidebarGroupLabel>
-          <SidebarMenu>
-            <Collapsible defaultOpen>
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton>
-                    <ChevronRight
-                      size={15}
-                      className="transition-transform group-data-[state=open]/collapsible:rotate-90"
-                    />
-                    Components
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {components.map((item) => (
-                      <SidebarMenuSubItem key={item.href}>
-                        <SidebarMenuSubButton
-                          asChild
-                          isActive={pathname === item.href}
-                          className="h-auto py-1.5"
-                        >
-                          <Link href={item.href}>
-                            <item.icon size={13} />
-                            {item.title}
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </SidebarMenuItem>
-            </Collapsible>
-          </SidebarMenu>
-        </SidebarGroup>
+        <SidebarMenu>
+          <Collapsible defaultOpen>
+            <SidebarMenuItem>
+              <CollapsibleTrigger asChild>
+                <SidebarMenuButton>
+                  <ChevronRight
+                    size={15}
+                    className="transition-transform group-data-[state=open]/collapsible:rotate-90"
+                  />
+                  Components
+                </SidebarMenuButton>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {components.map((item) => (
+                    <SidebarMenuSubItem key={item.href}>
+                      <SidebarMenuSubButton
+                        asChild
+                        isActive={pathname === item.href}
+                        className="h-auto py-1.5"
+                      >
+                        <Link href={item.href}>
+                          <item.icon size={13} />
+                          {item.title}
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </SidebarMenuItem>
+          </Collapsible>
+        </SidebarMenu>
       </SidebarContent>
     </Sidebar>
   );
