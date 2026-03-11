@@ -23,7 +23,7 @@ const items = [
         description:
             "A performant dropdown with virtualization for large datasets.",
         dependencies: ["@tanstack/react-virtual", "lucide-react"],
-        registryDependencies: ["command", "popover", "button"],
+        registryDependencies: ["command", "popover", "button", "checkbox"],
         files: [
             {
                 path: "components/ui/virtualized-dropdown.tsx",
