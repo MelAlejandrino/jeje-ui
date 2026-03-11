@@ -1,5 +1,5 @@
 import {useVirtualizer} from "@tanstack/react-virtual";
-import {Check, ChevronDown} from "lucide-react";
+import {ChevronDown} from "lucide-react";
 import {useState, useMemo, useRef, useLayoutEffect, useCallback} from "react";
 import {Checkbox} from "@/components/ui/checkbox";
 import {
