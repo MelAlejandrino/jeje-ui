@@ -6,6 +6,7 @@ export const HomePage = () => {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
       {/* Badge */}
+      {/* test push */}
       <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 text-xs text-muted-foreground">
         <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
         Built on top of shadcn/ui
