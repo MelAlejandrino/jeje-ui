@@ -152,7 +152,7 @@ export default function AutoCompletePageView() {
                 <h2 className="text-lg font-semibold text-foreground mb-3">
                     Installation
                 </h2>
-                <CopyCommand command="npx shadcn@latest add https://jeje-ui.vercel.app/r/autocomplete.json"/>
+                <CopyCommand command="npx jejeui add autocomplete"/>
             </div>
 
             {/* Usage */}
