@@ -13,12 +13,12 @@ export const metadata: Metadata = {
         template: "%s — jeje/ui",
     },
     description:
-        "A collection of reusable components built on top of shadcn/ui. Copy-paste ready, accessible, and customizable.",
+        "Practical, copy-paste React components built on top of shadcn/ui. Designed for dashboards, admin panels, and internal tools — but flexible enough for any project.",
     metadataBase: new URL("https://jeje-ui.vercel.app"),
     openGraph: {
         title: "jeje/ui",
         description:
-            "A collection of reusable components built on top of shadcn/ui. Copy-paste ready, accessible, and customizable.",
+            "Practical, copy-paste React components built on top of shadcn/ui. Designed for dashboards, admin panels, and internal tools — but flexible enough for any project.",
         siteName: "jeje/ui",
         url: "https://jeje-ui.vercel.app",
         type: "website",

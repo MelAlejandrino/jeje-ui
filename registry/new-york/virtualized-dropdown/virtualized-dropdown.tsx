@@ -162,6 +162,7 @@ function VirtualizedDropdown<T extends BaseOption>({
 
     // Virtualizer
     const parentRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line react-hooks/incompatible-library
     const rowVirtualizer = useVirtualizer({
         count: filteredOptions.length,
         getScrollElement: () => parentRef.current,

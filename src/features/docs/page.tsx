@@ -18,7 +18,8 @@ export const DocsPageView = () => {
                 >
                     shadcn/ui
                 </Link>
-                . Copy-paste ready, accessible, and customizable.
+                . Practical, copy-paste React components designed for dashboards,
+                admin panels, and internal tools — but flexible enough for any project.
             </p>
             <p className="mt-4 leading-7 text-muted-foreground">
                 All components follow shadcn/ui conventions — install them directly into
@@ -60,6 +61,5 @@ export const DocsPageView = () => {
                 </Link>
             </div>
         </>
-
     );
 }

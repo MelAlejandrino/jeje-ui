@@ -4,11 +4,11 @@ import {DocsPageView} from "@/features/docs/page";
 export const metadata: Metadata = {
     title: "Introduction",
     description:
-        "jeje/ui is a collection of reusable components built on top of shadcn/ui. Copy-paste ready, accessible, and customizable.",
+        "Practical, copy-paste React components built on top of shadcn/ui. Designed for dashboards, admin panels, and internal tools — but flexible enough for any project.",
     openGraph: {
         title: "Introduction — jeje/ui",
         description:
-            "jeje/ui is a collection of reusable components built on top of shadcn/ui. Copy-paste ready, accessible, and customizable.",
+            "Practical, copy-paste React components built on top of shadcn/ui. Designed for dashboards, admin panels, and internal tools — but flexible enough for any project.",
         url: "https://jeje-ui.vercel.app/docs",
     },
 };
