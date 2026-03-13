@@ -88,7 +88,7 @@ export const DataGridDemo = () => {
                 rows: 2,
                 size: 200,
                 render: (value) => (
-                    <span className="line-clamp-1">{String(value ?? "")}</span>
+                    <span className="break-words whitespace-normal">{String(value ?? "")}</span>
                 ),
             },
             salary: {
