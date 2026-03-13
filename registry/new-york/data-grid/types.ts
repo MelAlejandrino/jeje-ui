@@ -134,6 +134,7 @@ export interface UseTableOptions<TData extends Resource> {
     onView?: (id: TData["id"]) => void;
     extraActions?: ExtraAction<TData>[];
     pagination?: {
+        page?: number;
         pageSize?: number;
         total?: number;
         onPageChange?: (page: number, pageSize: number) => void;

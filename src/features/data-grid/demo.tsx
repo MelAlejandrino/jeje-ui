@@ -77,6 +77,7 @@ export const DataGridDemo = () => {
         data,
         pagination: {
             pageSize: 10
+
         },
         fields: {
             name: {label: "Name", type: "text", placeholder: "Enter name..."},

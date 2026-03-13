@@ -18,8 +18,9 @@ export function useTable<TData extends Resource>({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [createErrors, setCreateErrors] = useState<FieldErrors>({});
     const [editErrors, setEditErrors] = useState<FieldErrors>({});
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(paginationOptions?.page ?? 0);
     const [pageSize, setPageSize] = useState(paginationOptions?.pageSize ?? 10);
+
 
     const isServerSide = paginationOptions?.total !== undefined;
     const total = isServerSide ? (paginationOptions?.total ?? 0) : data.length;
