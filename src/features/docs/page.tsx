@@ -27,27 +27,6 @@ export const DocsPageView = () => {
                 just code you own.
             </p>
 
-            {/* Components */}
-            <div className="mt-8">
-                <h2 className="text-lg font-semibold text-foreground mb-3">Components</h2>
-                <div className="flex flex-col gap-2">
-                    {components.map((item) => (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className="group flex items-center justify-between rounded-lg border border-border bg-muted/30 px-4 py-3 hover:bg-muted transition-colors"
-                        >
-                            <div>
-                                <p className="text-sm font-medium text-foreground">{item.title}</p>
-                                <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
-                            </div>
-                            <ArrowRight size={15}
-                                        className="text-muted-foreground group-hover:text-foreground transition-colors shrink-0"/>
-                        </Link>
-                    ))}
-                </div>
-            </div>
-
             {/* GitHub */}
             <div className="mt-8">
                 <Link
