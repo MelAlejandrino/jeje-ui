@@ -22,7 +22,7 @@ export function Header() {
             Docs
           </Link>
           <Link
-            href="https://github.com/yourname/jeje-ui"
+            href="https://github.com/MelAlejandrino/jeje-ui"
             target="_blank"
             rel="noreferrer"
             className="text-muted-foreground transition-colors hover:text-foreground"

@@ -19,7 +19,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
-type BaseOption = { id: string | number; name?: string };
+export type BaseOption = { id: string | number; name?: string };
 
 type VirtualizedDropdownProps<T extends BaseOption> = {
     data: T[];
