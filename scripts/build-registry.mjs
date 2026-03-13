@@ -20,16 +20,14 @@ const items = [
         name: "virtualized-dropdown",
         type: "registry:component",
         title: "Virtualized Dropdown",
-        description:
-            "A performant dropdown with virtualization for large datasets.",
+        description: "A performant dropdown with virtualization for large datasets.",
         dependencies: ["@tanstack/react-virtual", "lucide-react"],
         registryDependencies: ["command", "popover", "button", "checkbox"],
         files: [
             {
                 path: "components/ui/virtualized-dropdown.tsx",
                 type: "registry:component",
-                source:
-                    "registry/new-york/virtualized-dropdown/virtualized-dropdown.tsx",
+                source: "registry/new-york/virtualized-dropdown/virtualized-dropdown.tsx",
             },
         ],
     },
@@ -45,6 +43,83 @@ const items = [
                 path: "components/ui/autocomplete.tsx",
                 type: "registry:component",
                 source: "registry/new-york/autocomplete/autocomplete.tsx",
+            },
+        ],
+    },
+    {
+        name: "data-grid",
+        type: "registry:component",
+        title: "Data Grid",
+        description: "Inline CRUD table with create, edit, delete, validation, and pagination. No TanStack required.",
+        dependencies: [
+            "lucide-react",
+            "react-number-format",
+        ],
+        registryDependencies: [
+            "table",
+            "button",
+            "input",
+            "textarea",
+            "checkbox",
+            "select",
+            "dropdown-menu",
+            `https://jeje-ui.vercel.app/r/virtualized-dropdown.json`,
+        ],
+        files: [
+            {
+                path: "components/data-grid/types.ts",
+                type: "registry:lib",
+                source: "registry/new-york/data-grid/types.ts",
+            },
+            {
+                path: "components/data-grid/use-table.ts",
+                type: "registry:hook",
+                source: "registry/new-york/data-grid/use-table.ts",
+            },
+            {
+                path: "components/data-grid/data-grid.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-grid.tsx",
+            },
+            {
+                path: "components/data-grid/data-table.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-table.tsx",
+            },
+            {
+                path: "components/data-grid/data-table-actions.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-table-actions.tsx",
+            },
+            {
+                path: "components/data-grid/data-table-cell-renderer.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-table-cell-renderer.tsx",
+            },
+            {
+                path: "components/data-grid/data-table-create-row.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-table-create-row.tsx",
+            },
+            {
+                path: "components/data-grid/data-table-edit-row.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-table-edit-row.tsx",
+            },
+            {
+                path: "components/data-grid/data-table-form-actions.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-table-form-actions.tsx",
+            },
+            {
+                path: "components/data-grid/data-table-pagination.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-table-pagination.tsx",
+            },
+            {
+                path: "components/data-grid/data-table-progress-spinner.tsx",
+                type: "registry:component",
+                source: "registry/new-york/data-grid/data-table-progress-spinner.tsx",
             },
         ],
     },

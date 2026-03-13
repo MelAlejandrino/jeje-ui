@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {BookOpen, ChevronRight, Image, List, Search} from "lucide-react";
+import {BookOpen, ChevronRight, Grid, Image, List, Search} from "lucide-react";
 import {
     Sidebar,
     SidebarContent,
@@ -30,6 +30,12 @@ const navItems = [
 
 const components = [
     {title: "Autocomplete", href: "/docs/components/autocomplete", icon: Search},
+    {
+        title: "Data Grid (Beta)",
+        href: "/docs/components/data-grid",
+        desc: "Inline CRUD table built on TanStack Table.",
+        icon: Grid
+    },
     {
         title: "Image Uploader",
         href: "/docs/components/image-uploader",
