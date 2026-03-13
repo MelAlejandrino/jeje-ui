@@ -4,11 +4,11 @@ import DataGridPage from "@/features/data-grid/page";
 export const metadata: Metadata = {
     title: "Data Grid",
     description:
-        "A powerful table component with inline row creation, editing, and deletion built on top of TanStack Table.",
+        "A headless inline CRUD table powered by useTable. Define fields, wire handlers, get a fully functional table with create, edit, delete, validation, and pagination.",
     openGraph: {
         title: "Data Grid — jeje/ui",
         description:
-            "A powerful table component with inline row creation, editing, and deletion built on top of TanStack Table.",
+            "A headless inline CRUD table powered by useTable. Define fields, wire handlers, get a fully functional table with create, edit, delete, validation, and pagination.",
         url: "https://jeje-ui.vercel.app/docs/components/data-grid",
     },
 };

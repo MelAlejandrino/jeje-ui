@@ -1,19 +1,6 @@
-import type {Metadata} from "next";
 import {CopyCommand} from "@/components/copy-command";
 import {DataGridDemo} from "@/features/data-grid/demo";
 import {renderOverrideCode, serverPaginationCode, usageCode, validationCode} from "@/features/data-grid/demo-code";
-
-export const metadata: Metadata = {
-    title: "Data Grid",
-    description:
-        "A headless inline CRUD table powered by useTable. Define fields, wire handlers, get a fully functional table with create, edit, delete, validation, and pagination.",
-    openGraph: {
-        title: "Data Grid — jeje/ui",
-        description:
-            "A headless inline CRUD table powered by useTable. Define fields, wire handlers, get a fully functional table with create, edit, delete, validation, and pagination.",
-        url: "https://jeje-ui.vercel.app/docs/components/data-grid",
-    },
-};
 
 const dataGridProps = [
     {
