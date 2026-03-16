@@ -6,9 +6,13 @@
   "description": "Inline CRUD table with create, edit, delete, validation, and pagination. No TanStack required.",
   "dependencies": [
     "lucide-react",
-    "react-number-format"
+    "react-number-format",
+    "date-fns"
   ],
   "registryDependencies": [
+    "field",
+    "popover",
+    "calendar",
     "table",
     "button",
     "input",
