@@ -76,8 +76,7 @@ export const DataGridDemo = () => {
     const {tableProps, setError} = useTable<Employee>({
         data,
         pagination: {
-            pageSize: 10
-
+            pageSize: 10,
         },
         fields: {
             name: {label: "Name", type: "text", placeholder: "Enter name..."},

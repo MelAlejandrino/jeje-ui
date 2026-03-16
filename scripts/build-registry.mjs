@@ -121,6 +121,11 @@ const items = [
                 type: "registry:component",
                 source: "registry/new-york/data-grid/data-table-progress-spinner.tsx",
             },
+            {
+                path: "components/date-picker/date-picker.tsx",
+                type: "registry:component",
+                source: "registry/new-york/date-picker/date-picker.tsx",
+            },
         ],
     },
 ];
