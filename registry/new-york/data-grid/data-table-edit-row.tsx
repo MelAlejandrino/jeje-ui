@@ -21,7 +21,19 @@ export function DataTableEditRow<TData extends Resource>({
                                                              isSubmitting = false,
                                                              errors = {},
                                                          }: DataTableEditRowProps<TData>) {
-    const [formData, setFormData] = useState<Partial<TData>>(row);
+    const getInitialFormData = () => {
+        const initial: Partial<TData> = {...row};
+        columns.forEach((col) => {
+            const field = col.field;
+            if (field?.type === "virtualized-dropdown" && field.getInitialValue) {
+                initial[col.key] = field.getInitialValue(row) as TData[keyof TData];
+            }
+        });
+        return initial;
+    };
+
+
+    const [formData, setFormData] = useState<Partial<TData>>(getInitialFormData);
     const [clearedFields, setClearedFields] = useState<Set<string>>(new Set());
 
     const handleChange = (key: keyof TData, value: unknown) => {

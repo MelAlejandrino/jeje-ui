@@ -74,8 +74,10 @@ export type FieldDef<TData> =
     data: DropdownItem[];
     nameSet?: string | ((item: DropdownItem) => string);
     idSet?: string | ((item: DropdownItem) => string);
+    getInitialValue?: (row: unknown) => unknown;
     single?: boolean;
     customEmptyMessage?: string;
+    keepOpenOnSelect?: boolean;
     size?: number;
     required?: boolean;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode;

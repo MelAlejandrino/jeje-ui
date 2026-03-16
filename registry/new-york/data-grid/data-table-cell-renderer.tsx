@@ -144,6 +144,7 @@ const CellInput = <TData extends Resource>({field, value, onChange, disabled}: C
                     value={value as never}
                     onChange={(selected) => onChange(selected)}
                     customEmptyMessage={field.customEmptyMessage}
+                    keepOpenOnSelect={field.keepOpenOnSelect}
                     disabled={disabled}
                 />
             );
