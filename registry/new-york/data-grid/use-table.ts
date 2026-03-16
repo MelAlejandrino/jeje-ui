@@ -132,6 +132,10 @@ export function useTable<TData extends Resource>({
         ? {page, pageSize, total, onPageChange: handlePageChange, onPageSizeChange: handlePageSizeChange}
         : undefined;
 
+    const onCancelCreate = () => {
+        setCreateErrors({});
+    };
+
     const tableProps: TableProps<TData> = {
         rows,
         columns,
@@ -147,6 +151,7 @@ export function useTable<TData extends Resource>({
         onEdit,
         extraActions,
         pagination: paginationState,
+        onCancelCreate
     };
 
     return {

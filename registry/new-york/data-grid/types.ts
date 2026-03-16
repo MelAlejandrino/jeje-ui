@@ -122,6 +122,7 @@ export interface TableProps<TData extends Resource> {
     onEdit: (id: TData["id"]) => void;
     extraActions?: ExtraAction<TData>[];
     pagination?: PaginationState;
+    onCancelCreate?: () => void;
 }
 
 export interface DataGridProps<TData extends Resource> {

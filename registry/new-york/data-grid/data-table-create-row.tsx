@@ -9,6 +9,7 @@ interface DataTableCreateRowProps<TData extends Resource> {
     onCreate: (data: Partial<TData>) => Promise<void>;
     isSubmitting?: boolean;
     errors?: FieldErrors;
+    onCancel?: () => void;
 }
 
 export function DataTableCreateRow<TData extends Resource>({
@@ -16,6 +17,7 @@ export function DataTableCreateRow<TData extends Resource>({
                                                                onCreate,
                                                                isSubmitting = false,
                                                                errors = {},
+                                                               onCancel
                                                            }: DataTableCreateRowProps<TData>) {
     const [formData, setFormData] = useState<Partial<TData>>({});
     const [clearedFields, setClearedFields] = useState<Set<string>>(new Set());
@@ -34,6 +36,7 @@ export function DataTableCreateRow<TData extends Resource>({
     const handleCancel = () => {
         setFormData({});
         setClearedFields(new Set());
+        onCancel?.();
     };
 
     const mergedErrors: FieldErrors = Object.fromEntries(

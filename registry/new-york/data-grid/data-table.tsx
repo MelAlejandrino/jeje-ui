@@ -38,6 +38,7 @@ export function DataTable<TData extends Resource>({
         onView,
         onEdit,
         extraActions,
+        onCancelCreate
     } = tableProps;
 
     return (
@@ -75,6 +76,7 @@ export function DataTable<TData extends Resource>({
                             onCreate={onCreate}
                             isSubmitting={isSubmitting}
                             errors={createErrors}
+                            onCancel={onCancelCreate}
                         />
                     )}
 
