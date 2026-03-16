@@ -54,8 +54,12 @@ const items = [
         dependencies: [
             "lucide-react",
             "react-number-format",
+            "date-fns"
         ],
         registryDependencies: [
+            "field",
+            "popover",
+            "calendar",
             "table",
             "button",
             "input",
