@@ -134,6 +134,9 @@ const CellInput = <TData extends Resource>({field, value, onChange, disabled}: C
                 </Select>
             );
 
+        case "readonly":
+            return null;
+
         case "virtualized-dropdown":
             return (
                 <VirtualizedDropdown

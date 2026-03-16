@@ -57,7 +57,14 @@ export function useTable<TData extends Resource>({
     };
 
     const handleSave = async (id: TData["id"], formData: Partial<TData>) => {
-        const validationErrors = validate(formData);
+        const payload = Object.fromEntries(
+            Object.entries(formData).filter(([key]) => {
+                const field = fields[key as keyof TData];
+                return field?.type !== "readonly";
+            })
+        ) as Partial<TData>;
+
+        const validationErrors = validate(payload);
         if (Object.keys(validationErrors).length > 0) {
             setEditErrors(validationErrors);
             throw new Error("Validation failed");

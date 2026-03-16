@@ -81,6 +81,11 @@ export type FieldDef<TData> =
     size?: number;
     required?: boolean;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode;
+} | {
+    label: string;
+    type: "readonly";
+    size?: number;
+    render?: (value: TData[keyof TData], row: TData) => React.ReactNode
 };
 
 export type FieldsDef<TData> = Partial<Record<keyof TData, FieldDef<TData>>>;

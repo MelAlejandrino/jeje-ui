@@ -76,7 +76,7 @@ export function DataTableEditRow<TData extends Resource>({
                             width: `${col.size}px`,
                         } : undefined}
                     >
-                        {field ? (
+                        {field && field.type !== "readonly" ? (
                             <DataTableCellRenderer
                                 field={field}
                                 value={formData[col.key] ?? ""}
@@ -86,8 +86,10 @@ export function DataTableEditRow<TData extends Resource>({
                             />
                         ) : (
                             <span className="text-sm text-muted-foreground">
-                                {String(row[col.key] ?? "")}
-                            </span>
+        {field?.render
+            ? field.render(formData[col.key] as TData[keyof TData], formData as TData)
+            : String(formData[col.key] ?? "—")}
+    </span>
                         )}
                     </TableCell>
                 );

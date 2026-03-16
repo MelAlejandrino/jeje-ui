@@ -61,7 +61,7 @@ export function DataTableCreateRow<TData extends Resource>({
                             width: `${col.size}px`,
                         } : undefined}
                     >
-                        {field ? (
+                        {field && field.type !== "readonly" ? (
                             <DataTableCellRenderer
                                 field={field}
                                 value={formData[col.key] ?? ""}
