@@ -73,57 +73,57 @@ const items = [
         files: [
             {
                 path: "components/data-grid/types.ts",
-                type: "registry:lib",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/types.ts",
             },
             {
                 path: "components/data-grid/use-table.ts",
-                type: "registry:hook",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/use-table.ts",
             },
             {
                 path: "components/data-grid/data-grid.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-grid.tsx",
             },
             {
                 path: "components/data-grid/data-table.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-table.tsx",
             },
             {
                 path: "components/data-grid/data-table-actions.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-table-actions.tsx",
             },
             {
                 path: "components/data-grid/data-table-cell-renderer.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-table-cell-renderer.tsx",
             },
             {
                 path: "components/data-grid/data-table-create-row.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-table-create-row.tsx",
             },
             {
                 path: "components/data-grid/data-table-edit-row.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-table-edit-row.tsx",
             },
             {
                 path: "components/data-grid/data-table-form-actions.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-table-form-actions.tsx",
             },
             {
                 path: "components/data-grid/data-table-pagination.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-table-pagination.tsx",
             },
             {
                 path: "components/data-grid/data-table-progress-spinner.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/data-grid/data-table-progress-spinner.tsx",
             },
         ],
@@ -138,7 +138,7 @@ const items = [
         files: [
             {
                 path: "components/date-picker/date-picker.tsx",
-                type: "registry:component",
+                type: "registry:file",
                 source: "registry/new-york/date-picker/date-picker.tsx",
             },
         ],
