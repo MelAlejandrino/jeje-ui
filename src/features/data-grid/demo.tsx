@@ -110,7 +110,7 @@ export const DataGridDemo = () => {
                 nameSet: "name",
                 getInitialValue: (row) => (row as Employee).department,
                 idSet: "id",
-                single: true
+                single: true,
             },
             start_date: {label: "Start Date", type: "date"},
             is_active: {label: "Active", type: "checkbox"},
