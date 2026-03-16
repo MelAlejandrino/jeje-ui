@@ -68,6 +68,7 @@ const items = [
             "select",
             "dropdown-menu",
             `https://jeje-ui.vercel.app/r/virtualized-dropdown.json`,
+            `https://jeje-ui.vercel.app/r/date-picker.json`,
         ],
         files: [
             {
@@ -125,6 +126,16 @@ const items = [
                 type: "registry:component",
                 source: "registry/new-york/data-grid/data-table-progress-spinner.tsx",
             },
+        ],
+    },
+    {
+        name: "date-picker",
+        type: "registry:component",
+        title: "Date Picker",
+        description: "A date picker component built on top of shadcn calendar and popover.",
+        dependencies: ["date-fns", "lucide-react"],
+        registryDependencies: ["popover", "calendar", "button", "field"],
+        files: [
             {
                 path: "components/date-picker/date-picker.tsx",
                 type: "registry:component",
