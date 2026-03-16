@@ -1,6 +1,12 @@
 import {CopyCommand} from "@/components/copy-command";
 import {DataGridDemo} from "@/features/data-grid/demo";
-import {renderOverrideCode, serverPaginationCode, usageCode, validationCode} from "@/features/data-grid/demo-code";
+import {
+    extraActionsCode,
+    renderOverrideCode,
+    serverPaginationCode,
+    usageCode,
+    validationCode
+} from "@/features/data-grid/demo-code";
 
 const dataGridProps = [
     {
@@ -419,6 +425,10 @@ export default function DataGridPage() {
                         </tbody>
                     </table>
                 </div>
+                <pre className="overflow-x-auto rounded-lg border border-border bg-muted/30 p-4 mt-5 text-sm mb-4">
+        {extraActionsCode}
+    </pre>
+
             </div>
 
         </div>
