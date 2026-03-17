@@ -21,6 +21,7 @@ export function DataTableCreateRow<TData extends Resource>({
                                                            }: DataTableCreateRowProps<TData>) {
     const [formData, setFormData] = useState<Partial<TData>>({});
     const [clearedFields, setClearedFields] = useState<Set<string>>(new Set());
+    const [resetKey, setResetKey] = useState(0);
 
     const handleChange = (key: keyof TData, value: unknown) => {
         setClearedFields((prev) => new Set(prev).add(String(key)));
@@ -36,6 +37,7 @@ export function DataTableCreateRow<TData extends Resource>({
     const handleCancel = () => {
         setFormData({});
         setClearedFields(new Set());
+        setResetKey(prev => prev + 1);
         onCancel?.();
     };
 
@@ -52,7 +54,7 @@ export function DataTableCreateRow<TData extends Resource>({
         }
     }, [errors]);
     return (
-        <TableRow className="bg-muted/60 hover:bg-muted/60 border-b-2 border-primary/20">
+        <TableRow key={resetKey} className="bg-muted/60 hover:bg-muted/60 border-b-2 border-primary/20">
             {columns.map((col) => {
                 const field = col.field;
                 return (
