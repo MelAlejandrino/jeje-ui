@@ -116,13 +116,13 @@ export const DataGridDemo = () => {
             start_date: {label: "Start Date", type: "date", sortable: true},
             is_active: {label: "Active", type: "checkbox"},
         },
-        sort: {
-            onSortChange: (key, direction) => {
-                // server side
-                console.log('key', key)
-                console.log('direction', direction)
-            }
-        },
+        // sort: {
+        //     onSortChange: (key, direction) => {
+        //         // server side
+        //         console.log('key', key)
+        //         console.log('direction', direction)
+        //     }
+        // },
         validation: {
             name: (value) => !value ? "Name is required" : null,
         },
