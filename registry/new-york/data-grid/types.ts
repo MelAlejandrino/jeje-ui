@@ -17,6 +17,13 @@ export interface DropdownItem {
 
 export type FieldErrors = Record<string, string>;
 
+export type SortDirection = "asc" | "desc";
+
+export interface SortState {
+    key: string;
+    direction: SortDirection;
+}
+
 // field definitions — controls both input and display
 export type FieldDef<TData> =
     | {
@@ -24,7 +31,9 @@ export type FieldDef<TData> =
     type: "text";
     placeholder?: string;
     size?: number;
+    sortable?: boolean;
     required?: boolean;
+    getInitialValue?: (row: unknown) => unknown;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode
 }
     | {
@@ -33,8 +42,10 @@ export type FieldDef<TData> =
     placeholder?: string;
     size?: number;
     required?: boolean;
+    sortable?: boolean;
     decimalScale?: number;
     thousandSeparator?: boolean;
+    getInitialValue?: (row: unknown) => unknown;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode
 }
     | {
@@ -42,22 +53,28 @@ export type FieldDef<TData> =
     type: "textarea";
     placeholder?: string;
     size?: number;
+    sortable?: boolean;
     required?: boolean;
     rows?: number;
+    getInitialValue?: (row: unknown) => unknown;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode
 }
     | {
     label: string;
     type: "checkbox";
+    sortable?: boolean;
     size?: number;
     required?: boolean;
+    getInitialValue?: (row: unknown) => unknown;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode
 }
     | {
     label: string;
     type: "date";
     size?: number;
+    sortable?: boolean;
     required?: boolean;
+    getInitialValue?: (row: unknown) => unknown;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode
 }
     | {
@@ -65,7 +82,9 @@ export type FieldDef<TData> =
     type: "select";
     options: SelectOption[];
     size?: number;
+    sortable?: boolean;
     required?: boolean;
+    getInitialValue?: (row: unknown) => unknown;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode
 }
     | {
@@ -79,13 +98,17 @@ export type FieldDef<TData> =
     customEmptyMessage?: string;
     keepOpenOnSelect?: boolean;
     size?: number;
+    sortable?: boolean;
     required?: boolean;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode;
 } | {
     label: string;
+    sortable?: boolean;
     type: "readonly";
     size?: number;
     render?: (value: TData[keyof TData], row: TData) => React.ReactNode
+    getInitialValue?: (row: unknown) => unknown;
+
 };
 
 export type FieldsDef<TData> = Partial<Record<keyof TData, FieldDef<TData>>>;
@@ -96,6 +119,7 @@ export interface ColumnMeta<TData> {
     key: keyof TData;
     label: string;
     size?: number;
+    sortable?: boolean;
     field?: FieldDef<TData>;
 }
 
@@ -123,6 +147,8 @@ export interface TableProps<TData extends Resource> {
     extraActions?: ExtraAction<TData>[];
     pagination?: PaginationState;
     onCancelCreate?: () => void;
+    sort?: SortState | null;
+    onSort?: (key: string, direction: SortDirection) => void;
 }
 
 export interface DataGridProps<TData extends Resource> {
@@ -141,6 +167,9 @@ export interface UseTableOptions<TData extends Resource> {
     onDelete?: (id: TData["id"]) => Promise<void> | void;
     onView?: (id: TData["id"]) => void;
     extraActions?: ExtraAction<TData>[];
+    sort?: {
+        onSortChange?: (key: string, direction: SortDirection) => void;
+    };
     pagination?: {
         page?: number;
         pageSize?: number;

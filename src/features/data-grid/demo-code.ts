@@ -95,8 +95,8 @@ export const useServiceCategories = () => {
       },
     },
     fields: {
-      id:          { label: 'ID',          type: 'readonly' },
-      name:        { label: 'Name',        type: 'text',     placeholder: 'Enter name...' },
+      id:          { label: 'ID',   type: 'readonly' },
+      name:        { label: 'Name', type: 'text', placeholder: 'Enter name...', sortable: true },
       company_ids: {
         label: 'Companies',
         type: 'virtualized-dropdown',
@@ -107,7 +107,7 @@ export const useServiceCategories = () => {
         size: 220,
         // read mode: render from row.companies instead of row.company_ids
         render: renderCompanies,
-        // edit mode: pre-fill with full objects from row.companies
+        // edit mode: pre-fill dropdown with full objects from row.companies
         getInitialValue: row => (row as ServiceCategory).companies,
       },
       description: { label: 'Description', type: 'text', placeholder: 'Enter description...' },
@@ -120,19 +120,17 @@ export const useServiceCategories = () => {
         const payload = {
           name: newData.name,
           description: newData.description,
-          // map full objects back to IDs for the API
           company_ids: ((newData.company_ids as unknown as { id: number }[]) ?? []).map(c => c.id),
         }
         await createMutation.mutateAsync(payload)
       } catch (error: any) {
-        // map backend field errors to inputs
         const details = error?.error?.details
         if (details) {
           Object.entries(details).forEach(([field, messages]) => {
             setError(field as keyof ServiceCategory, (messages as string[])[0])
           })
         }
-        throw error   // re-throw so create row stays open
+        throw error
       }
     },
     onSave: async (id, updated) => {
@@ -150,7 +148,7 @@ export const useServiceCategories = () => {
             setError(field as keyof ServiceCategory, (messages as string[])[0])
           })
         }
-        throw error   // re-throw so edit row stays open
+        throw error
       }
     },
     onDelete: async (id) => {
@@ -195,8 +193,8 @@ fields: {
     data: companies ?? [],
     nameSet: 'name',
     idSet: 'id',
-    render: renderCompanies,           // read mode
-    getInitialValue: row => (row as ServiceCategory).companies,  // edit mode pre-fill
+    render: renderCompanies,           // read mode: renders from row.companies
+    getInitialValue: row => (row as ServiceCategory).companies,  // edit mode: pre-fill with full objects
   },
 }`;
 
@@ -257,6 +255,69 @@ const { tableProps } = useTable<Employee>({
     },
   },
 })`;
+
+export const sortingCode = `// client-side sorting — just add sortable: true to any field
+fields: {
+  name:   { label: 'Name',   type: 'text',   sortable: true },
+  age:    { label: 'Age',    type: 'number', sortable: true },
+  salary: { label: 'Salary', type: 'number', sortable: true },
+  // non-sortable columns omit sortable or set it to false
+  notes:  { label: 'Notes',  type: 'textarea' },
+}
+
+// server-side sorting — pass onSortChange, useTable skips internal sort
+const [sort, setSort] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null)
+
+const { data } = useQuery({
+  queryKey: ['items', pagination, sort],
+  queryFn: () => fetchItems(pagination.page, pagination.pageSize, sort),
+})
+
+const fetchItems = async (page, pageSize, sort) => {
+  const params = new URLSearchParams({
+    page: String(page),
+    per_page: String(pageSize),
+    ...(sort && { sort_by: sort.key, sort_dir: sort.direction }),
+  })
+  const res = await fetch(\`/api/items?\${params}\`)
+  return res.json()
+}
+
+const { tableProps } = useTable<Item>({
+  data,
+  fields: {
+    name: { label: 'Name', type: 'text', sortable: true },
+  },
+  sort: {
+    onSortChange: (key, direction) => setSort({ key, direction }),
+  },
+})`;
+
+export const getInitialValueCode = `// getInitialValue lets you pre-fill any field in edit mode
+// from a different key or nested value in the row.
+
+// example: row has companies (full objects) but field key is company_ids
+fields: {
+  company_ids: {
+    label: 'Companies',
+    type: 'virtualized-dropdown',
+    data: companies ?? [],
+    nameSet: 'name',
+    idSet: 'id',
+    // without getInitialValue, edit mode would try to use row.company_ids (just IDs)
+    // with getInitialValue, edit mode pre-fills with full { id, name } objects
+    getInitialValue: row => (row as ServiceCategory).companies,
+  },
+}
+
+// works on any field type — e.g. pre-fill a text field from a nested value:
+fields: {
+  city: {
+    label: 'City',
+    type: 'text',
+    getInitialValue: row => (row as Employee).address?.city,
+  },
+}`;
 
 export const extraActionsCode = `extraActions: [
   {

@@ -95,6 +95,7 @@ export const DataGridDemo = () => {
                 label: "Salary",
                 type: "number",
                 placeholder: "Enter salary...",
+                getInitialValue: (row) => (row as Employee).salary,
                 thousandSeparator: true,
                 decimalScale: 2,
             },
@@ -112,8 +113,15 @@ export const DataGridDemo = () => {
                 idSet: "id",
                 single: true,
             },
-            start_date: {label: "Start Date", type: "date"},
+            start_date: {label: "Start Date", type: "date", sortable: true},
             is_active: {label: "Active", type: "checkbox"},
+        },
+        sort: {
+            onSortChange: (key, direction) => {
+                // server side
+                console.log('key', key)
+                console.log('direction', direction)
+            }
         },
         validation: {
             name: (value) => !value ? "Name is required" : null,

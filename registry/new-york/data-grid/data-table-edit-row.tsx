@@ -3,6 +3,7 @@ import {TableCell, TableRow} from "@/components/ui/table";
 import {DataTableCellRenderer} from "./data-table-cell-renderer";
 import {DataTableFormActions} from "./data-table-form-actions";
 import {ColumnMeta, FieldErrors, Resource} from "./types";
+import {isSameDay} from "date-fns";
 
 interface DataTableEditRowProps<TData extends Resource> {
     row: TData;
@@ -25,7 +26,7 @@ export function DataTableEditRow<TData extends Resource>({
         const initial: Partial<TData> = {...row};
         columns.forEach((col) => {
             const field = col.field;
-            if (field?.type === "virtualized-dropdown" && field.getInitialValue) {
+            if (field?.getInitialValue) {
                 initial[col.key] = field.getInitialValue(row) as TData[keyof TData];
             }
         });
@@ -54,7 +55,11 @@ export function DataTableEditRow<TData extends Resource>({
         Object.entries(errors).filter(([key]) => !clearedFields.has(key))
     );
 
-    const isDirty = JSON.stringify(formData) !== JSON.stringify(row);
+    const isDirty = !isEqual(formData, row);
+    console.log('formData.start_date', formData.start_date);
+    console.log('row.start_date', row.start_date);
+    console.log('isEqual result', isEqual(formData.start_date, row.start_date));
+    console.log('isDirty', isDirty);
 
     useEffect(() => {
         if (errors && Object.keys(errors).length > 0) {
@@ -105,3 +110,20 @@ export function DataTableEditRow<TData extends Resource>({
         </TableRow>
     );
 }
+
+function isEqual(a: unknown, b: unknown): boolean {
+    if (a === b) return true;
+    if (a instanceof Date && b instanceof Date) return isSameDay(a, b);
+    if (a === null || b === null) return a === b;
+    if (typeof a !== "object" || typeof b !== "object") return a === b;
+    if (Array.isArray(a) && Array.isArray(b)) {
+        if (a.length !== b.length) return false;
+        return a.every((item, i) => isEqual(item, b[i]));
+    }
+    if (Array.isArray(a) !== Array.isArray(b)) return false;
+    const keysA = Object.keys(a as object);
+    const keysB = Object.keys(b as object);
+    if (keysA.length !== keysB.length) return false;
+    return keysA.every((key) => isEqual((a as Record<string, unknown>)[key], (b as Record<string, unknown>)[key]));
+}
+

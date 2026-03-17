@@ -2,8 +2,10 @@ import {CopyCommand} from "@/components/copy-command";
 import {DataGridDemo} from "@/features/data-grid/demo";
 import {
     extraActionsCode,
+    getInitialValueCode,
     renderOverrideCode,
     serverPaginationCode,
+    sortingCode,
     usageCode,
     validationCode
 } from "@/features/data-grid/demo-code";
@@ -429,6 +431,37 @@ export default function DataGridPage() {
         {extraActionsCode}
     </pre>
 
+            </div>
+
+            {/* Sorting */}
+            <div>
+                <h2 className="mb-3 text-lg font-semibold text-foreground">Sorting</h2>
+                <p className="text-sm leading-7 text-muted-foreground mb-3">
+                    Add <code className="rounded bg-muted px-1 py-0.5 text-xs">sortable: true</code> to any field for
+                    client-side sorting.
+                    For server-side sorting pass <code
+                    className="rounded bg-muted px-1 py-0.5 text-xs">sort.onSortChange</code> —
+                    the grid skips internal sorting and calls your handler instead.
+                    Clicking a sort icon cycles <code className="rounded bg-muted px-1 py-0.5 text-xs">asc → desc</code>.
+                </p>
+                <pre className="overflow-x-auto rounded-lg border border-border bg-muted/30 p-4 text-sm">
+        {sortingCode}
+    </pre>
+            </div>
+
+            {/* getInitialValue */}
+            <div>
+                <h2 className="mb-3 text-lg font-semibold text-foreground">getInitialValue</h2>
+                <p className="text-sm leading-7 text-muted-foreground mb-3">
+                    By default edit mode pre-fills inputs from the row&#39;s own field value.
+                    Use <code className="rounded bg-muted px-1 py-0.5 text-xs">getInitialValue</code> to override this —
+                    useful when the field key differs from the data shape, or when you need to derive the initial value
+                    from a nested property.
+                    Works on all field types.
+                </p>
+                <pre className="overflow-x-auto rounded-lg border border-border bg-muted/30 p-4 text-sm">
+        {getInitialValueCode}
+    </pre>
             </div>
 
         </div>

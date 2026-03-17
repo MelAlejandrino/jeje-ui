@@ -1,3 +1,5 @@
+import React from 'react';
+import {ChevronUp, ChevronDown, ChevronsUpDown} from 'lucide-react';
 import {Scroller} from '@/components/ui/scroller';
 import {
     Table,
@@ -7,11 +9,12 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import {Button} from '@/components/ui/button';
 import {DataTableProgressSpinner} from "@/registry/new-york/data-grid/data-table-progress-spinner";
 import {DataTableCreateRow} from "@/registry/new-york/data-grid/data-table-create-row";
 import {DataTableEditRow} from "@/registry/new-york/data-grid/data-table-edit-row";
 import {DataTableActions} from "@/registry/new-york/data-grid/data-table-actions";
-import {FieldDef, Resource, TableProps} from "@/registry/new-york/data-grid/types";
+import {FieldDef, Resource, SortDirection, TableProps} from "@/registry/new-york/data-grid/types";
 
 interface DataTableProps<TData extends Resource> {
     tableProps: TableProps<TData>;
@@ -38,8 +41,27 @@ export function DataTable<TData extends Resource>({
         onView,
         onEdit,
         extraActions,
-        onCancelCreate
+        onCancelCreate,
+        sort,
+        onSort,
     } = tableProps;
+
+    const handleSort = (key: string) => {
+        if (!onSort) return;
+        if (sort?.key === key) {
+            // same column — toggle direction
+            const nextDirection: SortDirection = sort.direction === "asc" ? "desc" : "asc";
+            onSort(key, nextDirection);
+        } else {
+            // new column — start with asc
+            onSort(key, "asc");
+        }
+    };
+
+    const cellStyle = (size?: number) =>
+        size !== undefined
+            ? {minWidth: `${size}px`, width: `${size}px`, maxWidth: `${size}px`, overflow: 'hidden' as const}
+            : undefined;
 
     return (
         <Scroller
@@ -50,18 +72,37 @@ export function DataTable<TData extends Resource>({
             <Table className="w-full">
                 <TableHeader className="bg-muted">
                     <TableRow>
-                        {columns.map((col) => (
-                            <TableHead
-                                key={String(col.key)}
-                                className="sticky top-0 z-10 bg-muted"
-                                style={col.size !== undefined ? {
-                                    minWidth: `${col.size}px`,
-                                    width: `${col.size}px`,
-                                } : undefined}
-                            >
-                                {col.label}
-                            </TableHead>
-                        ))}
+                        {columns.map((col) => {
+                            const isSorted = sort?.key === String(col.key);
+                            const direction = isSorted ? sort?.direction : undefined;
+                            return (
+                                <TableHead
+                                    key={String(col.key)}
+                                    className="sticky top-0 z-10 bg-muted"
+                                    style={col.size !== undefined ? {
+                                        minWidth: `${col.size}px`,
+                                        width: `${col.size}px`,
+                                    } : undefined}
+                                >
+                                    <div className="flex items-center gap-1">
+                                        <span>{col.label}</span>
+                                        {col.sortable && (
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="h-6 w-6 shrink-0"
+                                                onClick={() => handleSort(String(col.key))}
+                                            >
+                                                {!isSorted &&
+                                                    <ChevronsUpDown className="h-3 w-3 text-muted-foreground"/>}
+                                                {isSorted && direction === "asc" && <ChevronUp className="h-3 w-3"/>}
+                                                {isSorted && direction === "desc" && <ChevronDown className="h-3 w-3"/>}
+                                            </Button>
+                                        )}
+                                    </div>
+                                </TableHead>
+                            );
+                        })}
                         <TableHead
                             className="sticky top-0 z-10 bg-muted"
                             style={{width: '1px', whiteSpace: 'nowrap'}}
@@ -69,7 +110,6 @@ export function DataTable<TData extends Resource>({
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {/* always-visible create row */}
                     {onCreate && (
                         <DataTableCreateRow
                             columns={columns}
@@ -106,31 +146,23 @@ export function DataTable<TData extends Resource>({
                                         const value = row[col.key];
                                         const field = col.field;
 
-                                        // use custom render if provided
                                         if (field?.render) {
                                             return (
                                                 <TableCell
                                                     key={String(col.key)}
                                                     className="border-r border-border last:border-r-0"
-                                                    style={col.size !== undefined ? {
-                                                        minWidth: `${col.size}px`,
-                                                        width: `${col.size}px`,
-                                                    } : undefined}
+                                                    style={cellStyle(col.size)}
                                                 >
                                                     {field.render(value as TData[keyof TData], row)}
                                                 </TableCell>
                                             );
                                         }
 
-                                        // auto render based on type
                                         return (
                                             <TableCell
                                                 key={String(col.key)}
                                                 className="border-r border-border last:border-r-0"
-                                                style={col.size !== undefined ? {
-                                                    minWidth: `${col.size}px`,
-                                                    width: `${col.size}px`,
-                                                } : undefined}
+                                                style={cellStyle(col.size)}
                                             >
                                                 {autoRender(value, field)}
                                             </TableCell>

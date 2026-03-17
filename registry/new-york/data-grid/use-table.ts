@@ -1,7 +1,17 @@
 // registry/new-york/data-grid/use-table.ts
 
 import {useRef, useState} from "react";
-import {ColumnMeta, FieldErrors, PaginationState, Resource, TableProps, UseTableOptions, ValidationFn} from "./types";
+import {
+    ColumnMeta,
+    FieldErrors,
+    PaginationState,
+    Resource,
+    SortDirection,
+    SortState,
+    TableProps,
+    UseTableOptions,
+    ValidationFn
+} from "./types";
 
 export function useTable<TData extends Resource>({
                                                      data,
@@ -13,6 +23,7 @@ export function useTable<TData extends Resource>({
                                                      onView,
                                                      extraActions,
                                                      pagination: paginationOptions,
+                                                     sort: sortOptions,
                                                  }: UseTableOptions<TData>) {
     const [editingRowId, setEditingRowId] = useState<TData["id"] | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,14 +31,14 @@ export function useTable<TData extends Resource>({
     const [editErrors, setEditErrors] = useState<FieldErrors>({});
     const [page, setPage] = useState(paginationOptions?.page ?? 0);
     const [pageSize, setPageSize] = useState(paginationOptions?.pageSize ?? 10);
-
+    const [sortState, setSortState] = useState<SortState | null>(null);
 
     const isServerSide = paginationOptions?.total !== undefined;
     const total = isServerSide ? (paginationOptions?.total ?? 0) : data.length;
 
     const columns: ColumnMeta<TData>[] = (Object.keys(fields) as Array<keyof TData>).map((key) => {
         const field = fields[key]!;
-        return {key, label: field.label, size: field.size, field};
+        return {key, label: field.label, size: field.size, sortable: field.sortable, field};
     });
 
     const validate = (formData: Partial<TData>): FieldErrors => {
@@ -114,11 +125,42 @@ export function useTable<TData extends Resource>({
         paginationOptions?.onPageChange?.(0, newSize);
     };
 
-    const rows = paginationOptions
+    const handleSort = (key: string, direction: SortDirection) => {
+        setSortState({key, direction});
+        sortOptions?.onSortChange?.(key, direction);
+    };
+
+    // client-side sort
+    const sortData = (rows: TData[]): TData[] => {
+        if (!sortState || sortOptions?.onSortChange) return rows; // skip if server-side
+        const {key, direction} = sortState;
+        return [...rows].sort((a, b) => {
+            const aVal = a[key as keyof TData];
+            const bVal = b[key as keyof TData];
+            if (aVal === null || aVal === undefined) return 1;
+            if (bVal === null || bVal === undefined) return -1;
+            if (aVal instanceof Date && bVal instanceof Date) {
+                return direction === "asc"
+                    ? aVal.getTime() - bVal.getTime()
+                    : bVal.getTime() - aVal.getTime();
+            }
+            if (typeof aVal === "number" && typeof bVal === "number") {
+                return direction === "asc" ? aVal - bVal : bVal - aVal;
+            }
+            const aStr = String(aVal).toLowerCase();
+            const bStr = String(bVal).toLowerCase();
+            if (direction === "asc") return aStr.localeCompare(bStr);
+            return bStr.localeCompare(aStr);
+        });
+    };
+
+    const rawRows = paginationOptions
         ? isServerSide
             ? data
             : data.slice(page * pageSize, page * pageSize + pageSize)
         : data;
+
+    const rows = sortData(rawRows);
 
     const setError = (field: keyof TData, message: string) => {
         if (editingRowIdRef.current !== null) {
@@ -151,7 +193,9 @@ export function useTable<TData extends Resource>({
         onEdit,
         extraActions,
         pagination: paginationState,
-        onCancelCreate
+        onCancelCreate,
+        sort: sortState,
+        onSort: handleSort,
     };
 
     return {
