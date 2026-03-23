@@ -1,15 +1,15 @@
 'use client'
 
-import {type KeyboardEvent, useCallback, useEffect, useRef, useState} from 'react'
+import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react'
 
-import {Check} from 'lucide-react'
+import { Check } from 'lucide-react'
 
-import {Command as CommandPrimitive} from 'cmdk'
+import { Command as CommandPrimitive } from 'cmdk'
 
-import {cn} from '@/lib/utils'
+import { CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command'
+import { Skeleton } from '@/components/ui/skeleton'
 
-import {CommandGroup, CommandInput, CommandItem, CommandList} from '@/components/ui/command'
-import {Skeleton} from '@/components/ui/skeleton'
+import { cn } from '@/lib/utils'
 
 export type Option = Record<'value' | 'label', string> & Record<string, string>
 
@@ -22,20 +22,20 @@ type AutoCompleteProps = {
     isLoading?: boolean
     disabled?: boolean
     placeholder?: string
-    openOnFocus?: boolean  // add this
+    openOnFocus?: boolean // add this
 }
 
 export const AutoComplete = ({
-                                 options,
-                                 placeholder,
-                                 emptyMessage = 'No results found.',
-                                 value,
-                                 onValueChange,
-                                 onClear,
-                                 disabled,
-                                 isLoading = false,
-                                 openOnFocus = false,
-                             }: AutoCompleteProps) => {
+    options,
+    placeholder,
+    emptyMessage = 'No results found.',
+    value,
+    onValueChange,
+    onClear,
+    disabled,
+    isLoading = false,
+    openOnFocus = false,
+}: AutoCompleteProps) => {
     const inputRef = useRef<HTMLInputElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
     const isSelectingRef = useRef(false)
@@ -74,7 +74,7 @@ export const AutoComplete = ({
             }
 
             const matched = options.find(o => o.label.toLowerCase() === trimmed.toLowerCase())
-            const resolved: Option = matched ?? {label: trimmed, value: trimmed}
+            const resolved: Option = matched ?? { label: trimmed, value: trimmed }
 
             if (resolved.value === value?.value && resolved.label === value?.label) return
 
@@ -153,9 +153,9 @@ export const AutoComplete = ({
                         isLoading
                             ? undefined
                             : val => {
-                                setInputValue(val)
-                                setIsOpen(true)
-                            }
+                                  setInputValue(val)
+                                  setIsOpen(true)
+                              }
                     }
                     onBlur={handleBlur}
                     placeholder={placeholder}
@@ -164,11 +164,11 @@ export const AutoComplete = ({
                 />
 
                 <div className={cn('absolute top-[calc(100%+4px)] left-0 z-10 w-full', isOpen ? 'block' : 'hidden')}>
-                    <CommandList className='animate-in fade-in-0 zoom-in-95 rounded-lg bg-popover ring-1 ring-border'>
+                    <CommandList className='animate-in fade-in-0 zoom-in-95 bg-popover ring-border rounded-lg ring-1'>
                         {isLoading ? (
                             <CommandPrimitive.Loading>
                                 <div className='p-1'>
-                                    <Skeleton className='h-8 w-full'/>
+                                    <Skeleton className='h-8 w-full' />
                                 </div>
                             </CommandPrimitive.Loading>
                         ) : null}
@@ -191,7 +191,7 @@ export const AutoComplete = ({
                                                 !isSelected ? 'pl-8' : null,
                                             )}
                                         >
-                                            {isSelected ? <Check className='w-4 shrink-0'/> : null}
+                                            {isSelected ? <Check className='w-4 shrink-0' /> : null}
                                             {option.label}
                                         </CommandItem>
                                     )
