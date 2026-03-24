@@ -254,7 +254,7 @@ function VirtualizedDropdown<T extends BaseOption>({
                                                     }),
                                                 )
                                             }
-                                            className='mr-2'
+                                            className='mr-2 [&_svg]:text-white!'
                                         />
                                         Select All
                                     </CommandItem>
