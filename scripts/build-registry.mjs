@@ -31,6 +31,21 @@ const items = [
             },
         ],
     },
+        {
+        name: 'limitless-dropdown',
+        type: 'registry:component',
+        title: 'Limitless Dropdown',
+        description: 'A performant dropdown with infinite scroll - fetch on scroll.',
+        dependencies: ['@tanstack/react-virtual', 'lucide-react'],
+        registryDependencies: ['command', 'popover', 'button', 'checkbox'],
+        files: [
+            {
+                path: 'components/ui/limitless-dropdown.tsx',
+                type: 'registry:component',
+                source: 'registry/new-york/limitless-dropdown/limitless-dropdown.tsx',
+            },
+        ],
+    },
     {
         name: "autocomplete",
         type: "registry:component",
